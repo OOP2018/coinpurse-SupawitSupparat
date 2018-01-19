@@ -9,10 +9,15 @@ public class Coin implements Comparable<Coin>{
 	double value;
 	String currency;
 	
+	Coin()
+	{
+		
+	}
+	
 	Coin(double value, String currency)
 	{
-		value = 0.5;
-		currency = "Dollar";
+		this.value = value;
+		this.currency = currency;
 	}
 	
 	public double getValue( )
@@ -41,11 +46,12 @@ public class Coin implements Comparable<Coin>{
 	
 	public int compareTo(Coin coin) 
 	{
-		if(coin.compareTo(coin)<0)
+		
+		if(coin.getValue()- this.getValue() <0)
 		{
 			return  -1;
 		}
-		else if(coin.compareTo(coin)>0)	
+		else if(coin.getValue()- this.getValue() > 0)	
 		{
 			return 1;
 		}
