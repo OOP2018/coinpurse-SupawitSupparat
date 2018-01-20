@@ -14,7 +14,7 @@ import java.util.Collections;
  */
 public class Purse {
 	/** Collection of objects in the purse. */
-	//TODO declare a List of Coins named "money".
+
 	List<Coin> money = new ArrayList<Coin>( );
 	/** Capacity is maximum number of items the purse can hold.
 	 *  Capacity is set when the purse is created and cannot be changed.
@@ -51,12 +51,11 @@ public class Purse {
 
 	}
 
-
 	/**
 	 * Return the capacity of the coin purse.
 	 * @return the capacity
 	 */
-	//TODO write accessor method for capacity. Use Java naming convention.
+
 	public int getCapacity() { 
 		return capacity; 
 	}
@@ -84,7 +83,6 @@ public class Purse {
 	 */
 	public boolean insert( Coin coin ) {
 		// if the purse is already full then can't insert anything.
-		//TODO complete the insert method
 		if(isFull()||coin.getValue()<=0)
 		{
 			return false;
@@ -102,7 +100,9 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 	public Coin[] withdraw( double amount ) {
+		//create a temporary list to keep the withdraw coin
 		List<Coin> withdrawcoin = new ArrayList<Coin>( ); 
+		
 		double amountNeededToWithdraw = amount;
 		
 		//return null when amount <= 0
@@ -131,8 +131,8 @@ public class Purse {
 		// This code assumes you decrease amount each time you remove a coin.
 		// Your code might use some other variable for the remaining amount to withdraw.
 		
+		//sort money
 		Collections.sort(this.money);
-		
 		
 		if(amountNeededToWithdraw!=0) {	
 			if(amountNeededToWithdraw <= this.getBalance())
@@ -146,8 +146,6 @@ public class Purse {
 					}
 				}
 			}
-		
-	
 		
 		if(amountNeededToWithdraw==0)
 		{
@@ -167,7 +165,7 @@ public class Purse {
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
-		return array; //TODO replace this with real code
+		return array;
 		}
 		return null;
 	}
@@ -179,6 +177,4 @@ public class Purse {
 	public String toString() {
 		return "purse have" + this.count() + "with balance" + this.getBalance();
 	}
-
 }
-//TODO When you finish, there should not be any TODO comments, including this one!

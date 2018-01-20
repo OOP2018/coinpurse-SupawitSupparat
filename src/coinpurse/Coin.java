@@ -9,11 +9,6 @@ public class Coin implements Comparable<Coin>{
 	double value;
 	String currency;
 	
-	Coin()
-	{
-		
-	}
-	
 	Coin(double value, String currency)
 	{
 		this.value = value;
