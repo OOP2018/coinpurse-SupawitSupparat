@@ -1,7 +1,7 @@
 package coinpurse;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 
 // You will use Collections.sort() to sort the coins
 
@@ -56,7 +56,7 @@ public class Purse {
 	 */
 	//TODO write accessor method for capacity. Use Java naming convention.
 	public int getCapacity() { 
-		return 0; 
+		return capacity; 
 	}
 
 	/** 
@@ -99,8 +99,19 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 	public Coin[] withdraw( double amount ) {
-		//TODO don't allow to withdraw amount < 0
-
+			List<Coin> withdrawcoin = new ArrayList<Coin>( ); 
+		double amountNeededToWithdraw = amount;
+		
+		//return null when amount <= 
+		if(amount<=0)
+		{
+			return null;
+		}
+		
+		else if (amount>getBalance())
+		{
+			System.out.print("Withdraw exceed Balance");
+		}
 		/*
 		 * See lab sheet for outline of a solution, 
 		 * or devise your own solution.
@@ -120,18 +131,42 @@ public class Purse {
 		// Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
 		// Your code might use some other variable for the remaining amount to withdraw.
+		
+		Collections.sort(money);
+		Collections.reverse(money);
+		if(amount>0) {	
+		for (Coin coin: money)
+		{
+			if(amountNeededToWithdraw>0) 
+			{
+				if(amountNeededToWithdraw >= coin.getValue())
+				{
+					withdrawcoin.add(coin);
+					amountNeededToWithdraw = amountNeededToWithdraw - coin.getValue(); 
+				}
+			}
+		}
+	}
+		
+		if(amountNeededToWithdraw==0)
+		{
+			for(Coin c : withdrawcoin)
+			{
+				money.remove(withdrawcoin);
+			}
+		}
 		if ( amountNeededToWithdraw != 0 )
 		{	
-			// failed. Don't change the contents of the purse.
-
+			return null;
 		}
-
+		Coin[] array = new Coin[withdrawcoin.size()];
+		withdrawcoin.toArray(array);
 		// Success.
 		// Remove the coins you want to withdraw from purse,
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
-		return new Coin[0]; //TODO replace this with real code
+		return array; //TODO replace this with real code
 	}
 
 	/** 
@@ -139,8 +174,7 @@ public class Purse {
 	 * It can return whatever is a useful description.
 	 */
 	public String toString() {
-		//TODO complete this
-		return "you forgot to write Purse.toString()";
+		return String.format("This purse have %d coin with value of %.1f and %d capacity",this.count(),this.getBalance(),this.getCapacity());
 	}
 
 }
