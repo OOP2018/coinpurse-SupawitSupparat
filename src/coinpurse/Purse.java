@@ -34,7 +34,9 @@ public class Purse {
 	 * This is the number of coins, not their value.
 	 * @return the number of coins in the purse
 	 */
-	public int count() { return money.size(); }
+	public int count() {
+		return money.size(); 
+		}
 
 	/** 
 	 *  Get the total value of all items in the purse.
@@ -43,7 +45,7 @@ public class Purse {
 	public double getBalance() {
 		int i;
 		double sum = 0;
-		for(i = 1; i < money.size(); i++)
+		for(i = 0; i < money.size(); i++)
 			sum += money.get(i).getValue();
 		return sum;
 
@@ -87,7 +89,8 @@ public class Purse {
 		{
 			return false;
 		}
-		else return false;
+		money.add(coin);
+		return true;
 	}
 
 	/**  
@@ -99,19 +102,15 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 	public Coin[] withdraw( double amount ) {
-			List<Coin> withdrawcoin = new ArrayList<Coin>( ); 
+		List<Coin> withdrawcoin = new ArrayList<Coin>( ); 
 		double amountNeededToWithdraw = amount;
 		
-		//return null when amount <= 
+		//return null when amount <= 0
 		if(amount<=0)
 		{
 			return null;
 		}
 		
-		else if (amount>getBalance())
-		{
-			System.out.print("Withdraw exceed Balance");
-		}
 		/*
 		 * See lab sheet for outline of a solution, 
 		 * or devise your own solution.
@@ -132,30 +131,32 @@ public class Purse {
 		// This code assumes you decrease amount each time you remove a coin.
 		// Your code might use some other variable for the remaining amount to withdraw.
 		
-		Collections.sort(money);
-		Collections.reverse(money);
-		if(amount>0) {	
-		for (Coin coin: money)
-		{
-			if(amountNeededToWithdraw>0) 
+		Collections.sort(this.money);
+		
+		
+		if(amountNeededToWithdraw!=0) {	
+			if(amountNeededToWithdraw <= this.getBalance())
 			{
-				if(amountNeededToWithdraw >= coin.getValue())
+				for (Coin coin: this.money)
 				{
-					withdrawcoin.add(coin);
-					amountNeededToWithdraw = amountNeededToWithdraw - coin.getValue(); 
+					if(amountNeededToWithdraw >= coin.getValue())
+					{
+						amountNeededToWithdraw -= coin.getValue();
+						withdrawcoin.add(coin);
+					}
 				}
 			}
-		}
-	}
+		
+	
 		
 		if(amountNeededToWithdraw==0)
 		{
 			for(Coin c : withdrawcoin)
 			{
-				money.remove(withdrawcoin);
+				money.remove(c);
 			}
 		}
-		if ( amountNeededToWithdraw != 0 )
+		else if ( amountNeededToWithdraw != 0 )
 		{	
 			return null;
 		}
@@ -167,6 +168,8 @@ public class Purse {
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
 		return array; //TODO replace this with real code
+		}
+		return null;
 	}
 
 	/** 
@@ -174,7 +177,7 @@ public class Purse {
 	 * It can return whatever is a useful description.
 	 */
 	public String toString() {
-		return String.format("This purse have %d coin with value of %.1f and %d capacity",this.count(),this.getBalance(),this.getCapacity());
+		return "purse have" + this.count() + "with balance" + this.getBalance();
 	}
 
 }
