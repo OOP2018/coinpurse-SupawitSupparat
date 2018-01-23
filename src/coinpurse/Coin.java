@@ -1,7 +1,7 @@
 package coinpurse;
 /**
 * Coin represents coinage (money) with a fixed value and currency.
-* @author Bill Gates
+* @author Supawit Supparat
 */
 
 public class Coin implements Comparable<Coin>{
