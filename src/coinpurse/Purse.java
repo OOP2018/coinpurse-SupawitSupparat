@@ -10,8 +10,9 @@ import java.util.Collections;
  *  You can insert coins, withdraw money, check the balance,
  *  and check if the purse is full.
  *  
- *  @author SuapwitSupparat5810545483
+ *  @author Suapwit Supparat
  */
+
 public class Purse {
 	/** Collection of objects in the purse. */
 
@@ -36,7 +37,7 @@ public class Purse {
 	 */
 	public int count() {
 		return money.size(); 
-		}
+	}
 
 	/** 
 	 *  Get the total value of all items in the purse.
@@ -48,7 +49,6 @@ public class Purse {
 		for(i = 0; i < money.size(); i++)
 			sum += money.get(i).getValue();
 		return sum;
-
 	}
 
 	/**
@@ -102,15 +102,15 @@ public class Purse {
 	public Coin[] withdraw( double amount ) {
 		//create a temporary list to keep the withdraw coin
 		List<Coin> withdrawcoin = new ArrayList<Coin>( ); 
-		
+
 		double amountNeededToWithdraw = amount;
-		
+
 		//return null when amount <= 0
 		if(amount<=0)
 		{
 			return null;
 		}
-		
+
 		/*
 		 * See lab sheet for outline of a solution, 
 		 * or devise your own solution.
@@ -130,10 +130,10 @@ public class Purse {
 		// Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
 		// Your code might use some other variable for the remaining amount to withdraw.
-		
+
 		//sort money
 		Collections.sort(this.money);
-		
+
 		if(amountNeededToWithdraw!=0) {	
 			if(amountNeededToWithdraw <= this.getBalance())
 			{
@@ -146,26 +146,26 @@ public class Purse {
 					}
 				}
 			}
-		
-		if(amountNeededToWithdraw==0)
-		{
-			for(Coin c : withdrawcoin)
+
+			if(amountNeededToWithdraw==0)
 			{
-				money.remove(c);
+				for(Coin c : withdrawcoin)
+				{
+					money.remove(c);
+				}
 			}
-		}
-		else if ( amountNeededToWithdraw != 0 )
-		{	
-			return null;
-		}
-		Coin[] array = new Coin[withdrawcoin.size()];
-		withdrawcoin.toArray(array);
-		// Success.
-		// Remove the coins you want to withdraw from purse,
-		// and return them as an array.
-		// Use list.toArray( array[] ) to copy a list into an array.
-		// toArray returns a reference to the array itself.
-		return array;
+			else if ( amountNeededToWithdraw != 0 )
+			{	
+				return null;
+			}
+			Coin[] array = new Coin[withdrawcoin.size()];
+			withdrawcoin.toArray(array);
+			// Success.
+			// Remove the coins you want to withdraw from purse,
+			// and return them as an array.
+			// Use list.toArray( array[] ) to copy a list into an array.
+			// toArray returns a reference to the array itself.
+			return array;
 		}
 		return null;
 	}
