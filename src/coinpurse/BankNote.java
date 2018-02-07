@@ -17,31 +17,31 @@ public class BankNote implements Valuable{
 		this.serialNumber = nextSerialNumber;
 		nextSerialNumber++;
 	}
-	
-	 /** 
-     * Initialize a new Purse dialog.
-     * @return value of this banknote.
-     */
+
+	/** 
+	 * Get the value of Banknote
+	 * @return value of this banknote.
+	 */
 	@Override
 	public double getValue() {
 		return this.value;
 	}
-	
+
 	/** 
-     * Initialize a new Purse dialog.
-     * @return currency of this banknote.
-     */
+	 * Get the currency of Banknote
+	 * @return currency of this banknote.
+	 */
 	@Override
 	public String getCurrency() {
 		return this.currency;
 	}
-	
+
 	/** 
-     * Initialize a new Purse dialog.
-     * @return serial of this banknote.
-     */
+	 * Get the serial number of Banknote
+	 * @return serial of this banknote.
+	 */
 	public long getSerial() {
-		return serialNumber;
+		return this.serialNumber;
 	}
 
 	/**
@@ -53,16 +53,22 @@ public class BankNote implements Valuable{
 		if(obj == null){
 			return false;
 		}
-
-		BankNote banknote = (BankNote) obj;
-		if( obj instanceof BankNote)  {
-			if( this.value == banknote.value && this.currency.equals(banknote.currency)){
-				return true;
-			}
-			else{
-				return false;
-			}
+		if (obj.getClass() != this.getClass()) {
+			return false;
 		}
-		else return false;
+		BankNote banknote = (BankNote) obj;
+		if( this.value == banknote.getValue() && this.currency.equals(banknote.getCurrency())){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * @return the string describing banknote
+	 */
+	public String toString() {
+		return value + " " + currency + " Serial Number : " + serialNumber;
 	}
 }

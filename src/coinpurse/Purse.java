@@ -99,7 +99,6 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
 	 */
 	public Valuable[] withdraw( double amount ) {
-		//create a temporary list to keep the withdraw coin
 		List<Valuable> list = new ArrayList<Valuable>();
 		Comparator<Valuable> comp = new ValueComparator();
 
@@ -112,7 +111,7 @@ public class Purse {
 		}
 
 		Collections.sort(money , comp);
-
+		Collections.reverse(money);
 		if(amountNeededToWithdraw!=0) {	
 			if(amountNeededToWithdraw <= this.getBalance())
 			{
@@ -132,14 +131,9 @@ public class Purse {
 				{
 					money.remove(values);
 				}
+				Valuable[] withdraw = new Valuable[list.size()];
+				return list.toArray(withdraw);
 			}
-			else if ( amountNeededToWithdraw != 0 )
-			{	
-				return null;
-			}
-			
-			Valuable[] withdraw = new Valuable[list.size()];
-			 return list.toArray(withdraw);
 		}
 		return null;
 	}
