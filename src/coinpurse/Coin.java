@@ -4,56 +4,23 @@ package coinpurse;
 * @author Supawit Supparat
 */
 
-public class Coin implements Comparable<Coin> , Valuable{
-
-	double value;
-	String currency;
-	
+public class Coin extends Money{
+	/**
+	 * Create a new Coin.
+	 * @param value is the value of the Coin.
+	 * @param currency is the currency of the Coin.
+	 */
 	Coin(double value, String currency)
 	{
-		this.value = value;
-		this.currency = currency;
-	}
-	
-	public double getValue( )
-	{
-		return this.value;
-	}
-	
-	public String getCurrency() 
-	{
-		return this.currency;
-	}
-	
-	public boolean equals(Object arg) 
-	{
-		if (arg == null) return false;
-		if (arg.getClass() != this.getClass() )
-			return false;
-		Coin other = (Coin) arg;
-		if ( currency.equalsIgnoreCase( other.currency ) && value==other.value )
-			return true;
-		return false; 
-		
+		super(value,currency);
 	}
 	
 	
-	public int compareTo(Coin coin) 
-	{
-		
-		if(coin.getValue()- this.getValue() <0)
-		{
-			return  -1;
-		}
-		else if(coin.getValue()- this.getValue() > 0)	
-		{
-			return 1;
-		}
-		else return 0;
-	}
-	
+	/**
+	 * @return the string describing Coin
+	 */
 	public String toString()
 	{
-		return value + " " + currency;
+		return getValue() + " " + getCurrency();
 	}
 }

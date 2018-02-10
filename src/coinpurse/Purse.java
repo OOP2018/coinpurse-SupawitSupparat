@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- *  A purse contains coins and banknote.
- *  You can insert coins, withdraw money, check the balance,
+ *  A purse contains money which can be coins and banknote.
+ *  You can insert money, withdraw money, check the balance,
  *  and check if the purse is full.
  *  
  *  @author Suapwit Supparat
@@ -98,18 +98,19 @@ public class Purse {
 	 *  @return array of value objects for money withdrawn, 
 	 *    or null if cannot withdraw requested amount.
 	 */
-	public Valuable[] withdraw( double amount ) {
+	public Valuable[] withdraw( Valuable amount ) {
 		List<Valuable> list = new ArrayList<Valuable>();
 		Comparator<Valuable> comp = new ValueComparator();
 
-		double amountNeededToWithdraw = amount;
 
+		double amountNeededToWithdraw = amount.getValue();
+		String amountcurrency = amount.getCurrency();
+		
 		//return null when amount <= 0
-		if(amount<=0)
-		{
-			return null;
-		}
-
+				if(amount.getValue()<=0||amount == null){
+					return null;
+				}
+				
 		Collections.sort(money , comp);
 		Collections.reverse(money);
 		if(amountNeededToWithdraw!=0) {	
@@ -117,7 +118,10 @@ public class Purse {
 			{
 				for (Valuable values : this.money)
 				{
-					if(amountNeededToWithdraw >= values.getValue())
+					String currency = values.getCurrency();
+					double value = values.getValue();
+					
+					if(amountNeededToWithdraw >= value&&amountcurrency.equalsIgnoreCase(currency))
 					{
 						amountNeededToWithdraw -= values.getValue();
 						list.add(values);
@@ -136,6 +140,19 @@ public class Purse {
 			}
 		}
 		return null;
+	}
+	
+	/**  
+	 *  Withdraw the requested amount of money.
+	 *  Create new Money with amount and default currency is Baht.
+	 *  Return an array of value withdrawn from purse,
+	 *  or return null if cannot withdraw the amount requested.
+	 *  @param amount is the amount to withdraw
+	 *  @return array of value objects for money withdrawn, 
+	 *    or null if cannot withdraw requested amount.
+	 */
+	public Valuable[] withdraw(double amount) {
+		 return withdraw(new Money(amount, "Baht"));
 	}
 
 	/** 
